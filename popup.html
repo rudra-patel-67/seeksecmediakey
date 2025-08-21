@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>PiP Seeker Settings</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <h1>PiP Seeker</h1>
+  <div class="container">
+    <header class="header">
+      <img src="icon.png" alt="PiP Media Seeker icon" class="logo">
+      <h1>PiP Seeker</h1>
+    </header>
 
-  <div class="setting-group">
-    <label for="toggle-switch">Extension Status:</label>
-    <label class="switch">
-      <input type="checkbox" id="toggle-switch">
-      <span class="slider"></span>
-    </label>
+    <main class="settings">
+      <div class="setting-row">
+        <label for="toggle-switch">Extension Enabled</label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-switch">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label>Seek Duration</label>
+        <div class="seek-options" id="seek-options">
+          <button class="seek-btn" data-seconds="5">5s</button>
+          <button class="seek-btn" data-seconds="10">10s</button>
+          <button class="seek-btn" data-seconds="15">15s</button>
+          <button class="seek-btn" data-seconds="30">30s</button>
+        </div>
+      </div>
+    </main>
   </div>
-
-  <div class="setting-group">
-    <p>Seek Duration:</p>
-    <div class="buttons">
-      <button class="seek-btn" data-seconds="5">5s</button>
-      <button class="seek-btn" data-seconds="10">10s</button>
-      <button class="seek-btn" data-seconds="15">15s</button>
-      <button class="seek-btn" data-seconds="30">30s</button>
-    </div>
-  </div>
-
   <script src="popup.js"></script>
 </body>
 </html>

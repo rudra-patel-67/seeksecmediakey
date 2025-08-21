@@ -20,6 +20,9 @@
     },
     "seek_backward": {
       "description": "Seeks backward in the PiP video."
+    },
+    "toggle_play_pause": {
+      "description": "Toggles play/pause on the PiP video."
     }
   },
   "action": {
