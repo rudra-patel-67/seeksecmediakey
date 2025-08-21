@@ -9,13 +9,11 @@ async function handleSeek(direction) {
     return;
   }
 
-  // Query for all audible tabs
-  const audibleTabs = await chrome.tabs.query({
-    audible: true
-  });
+  // Query for all tabs
+  const allTabs = await chrome.tabs.query({});
 
-  if (!audibleTabs || audibleTabs.length === 0) {
-    return; // No audible tabs found
+  if (!allTabs || allTabs.length === 0) {
+    return; // No tabs found
   }
 
   const seekFunction = (direction, seconds) => {
@@ -31,8 +29,8 @@ async function handleSeek(direction) {
     return false; // Indicate failure
   };
 
-  // Iterate through all audible tabs and try to seek
-  for (const tab of audibleTabs) {
+  // Iterate through all tabs and try to seek
+  for (const tab of allTabs) {
     try {
       const results = await chrome.scripting.executeScript({
         target: { tabId: tab.id },
