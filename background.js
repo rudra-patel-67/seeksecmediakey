@@ -9,13 +9,13 @@ async function handleSeek(direction) {
     return;
   }
 
-  const [pipWindow] = await chrome.tabs.query({
-    windowType: 'normal',
+  // Query for all audible tabs
+  const audibleTabs = await chrome.tabs.query({
     audible: true
   });
 
-  if (!pipWindow) {
-    return;
+  if (!audibleTabs || audibleTabs.length === 0) {
+    return; // No audible tabs found
   }
 
   const seekFunction = (direction, seconds) => {
@@ -26,14 +26,29 @@ async function handleSeek(direction) {
       } else if (direction === 'backward') {
         video.currentTime -= seconds;
       }
+      return true; // Indicate success
     }
+    return false; // Indicate failure
   };
 
-  await chrome.scripting.executeScript({
-    target: { tabId: pipWindow.id },
-    func: seekFunction,
-    args: [direction, seekSeconds]
-  });
+  // Iterate through all audible tabs and try to seek
+  for (const tab of audibleTabs) {
+    try {
+      const results = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: seekFunction,
+        args: [direction, seekSeconds],
+      });
+
+      // If the script returned true, we've found the PiP video and can stop.
+      if (results && results[0] && results[0].result) {
+        break;
+      }
+    } catch (e) {
+      // Ignore errors for tabs where script injection is not allowed (e.g., chrome:// pages)
+      // console.error(`Failed to inject script in tab ${tab.id}: ${e.message}`);
+    }
+  }
 }
 
 // Listen for the commands defined in manifest.json

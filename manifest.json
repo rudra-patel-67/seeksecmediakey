@@ -8,9 +8,11 @@
   },
   "permissions": [
     "scripting",
-    "activeTab",
     "tabs",
     "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "commands": {
     "seek_forward": {
