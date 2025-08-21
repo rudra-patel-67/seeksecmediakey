@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PiP Seeker Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>PiP Seeker</h1>
+
+  <div class="setting-group">
+    <label for="toggle-switch">Extension Status:</label>
+    <label class="switch">
+      <input type="checkbox" id="toggle-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="setting-group">
+    <p>Seek Duration:</p>
+    <div class="buttons">
+      <button class="seek-btn" data-seconds="5">5s</button>
+      <button class="seek-btn" data-seconds="10">10s</button>
+      <button class="seek-btn" data-seconds="15">15s</button>
+      <button class="seek-btn" data-seconds="30">30s</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
